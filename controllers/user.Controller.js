@@ -45,7 +45,7 @@ async function sendConfirmationEmail(email, confirmationToken) {
 
 const addUser = async (req,res) => {
     try{
-        const { name,email,password} = req.body;
+        const { name, email, password, role} = req.body;
 
         //Check if the email is valid
         if (!validateEmail(email)) {
@@ -75,6 +75,7 @@ const addUser = async (req,res) => {
             email,
             password: encryptPassword,
             confirmationToken,
+            role:'user'
         }); await newUser.save();
 
 
@@ -147,10 +148,10 @@ const updateUser = async (req,res) => {
 const deleteUser = async (req,res) => {
     try{
         const {id} =req.params;
-        const deleteUser = await user.findByIdAndelete(id);
+        const deleteUser = await user.findByIdAndDelete(id);
 
         if(!deleteUser) {
-            return res.status(400).json({message:"USer Not Found"});
+            return res.status(200).json({message:"USer Not Found"});
         };
     }catch (error) {
         res.status(500).json({error:error.message});
