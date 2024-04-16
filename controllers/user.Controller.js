@@ -75,7 +75,7 @@ const addUser = async (req,res) => {
             email,
             password: encryptPassword,
             confirmationToken,
-            role:'user'
+            role,
         }); await newUser.save();
 
 

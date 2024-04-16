@@ -4,7 +4,7 @@ const UserSchema = mongoose.Schema(
     {
         name: {
             type: String,
-            required: [true, "Please enter the user name"],
+            required: [true, "Please enter the user name"]
         },
 
         email:{
@@ -21,6 +21,16 @@ const UserSchema = mongoose.Schema(
         profilePicture: {
             type: String,
         },
+        role: {
+            type: String,
+            enum: ['user', 'admin'],
+            default: 'user'
+        },
+        confirmationToken: String,
+        cofirmed: {
+            type: Boolean,
+            default: false
+        }
     }, 
     {
         timestamps: true,
